@@ -11,5 +11,16 @@ public class Banda {
     private Musico[] musicos;
 
     public Banda() {
+        this.id = id;
     }
+
+    public Banda(String id, String name) {
+        this.id = id;
+        this.nombre = name;
+    }
+
+    public String getBandaName() {
+        return nombre;
+    }
+
 }
