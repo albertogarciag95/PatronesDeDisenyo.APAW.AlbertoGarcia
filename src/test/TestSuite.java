@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestSuite {
 
@@ -31,5 +33,25 @@ public class TestSuite {
 
         assertEquals("Trompeta de Laton",
                 instrumento.getNombre() + " de " + instrumento.getMaterial());
+    }
+
+    @Test
+    public void testPartituraComposite() {
+        Partitura partitura = new Partitura("1", "9º Sinfonia Beethoven");
+        Partitura partitura2 = new Partitura("2", "8º Sinfonia Beethoven");
+
+        PartituraLeaf partituraLeaf = new PartituraLeaf(partitura);
+        PartituraLeaf partituraLeaf2 = new PartituraLeaf(partitura2);
+
+        PartituraComposite partituraComposite = new PartituraComposite("Beethoven sinfonies");
+        partituraComposite.add(partituraLeaf);
+        partituraComposite.add(partituraLeaf2);
+
+        assertTrue(partituraComposite.isComposite());
+        assertFalse(partituraLeaf.isComposite());
+
+        //Devuelve id de partitura si es hoja; nombre si es composite
+        assertEquals("Beethoven sinfonies", partituraComposite.view());
+        assertEquals("1", partituraLeaf.view());
     }
 }
