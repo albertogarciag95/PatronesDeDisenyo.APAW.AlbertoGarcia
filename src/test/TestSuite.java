@@ -23,4 +23,13 @@ public class TestSuite {
         assertEquals("Union Musical Ciudad de Asis",
                 BandaFactory.getBandafactory().getBanda("1").getBandaName());
     }
+
+    @Test
+    public void testInstrumentoBuilder() {
+        Instrumento instrumento = new InstrumentoBuilder().id("1").nombre("Trompeta")
+                .material("Laton").familia(FamiliaInstrumento.VIENTO_METAL).build();
+
+        assertEquals("Trompeta de Laton",
+                instrumento.getNombre() + " de " + instrumento.getMaterial());
+    }
 }

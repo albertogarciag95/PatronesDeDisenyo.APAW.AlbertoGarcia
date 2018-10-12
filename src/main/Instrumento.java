@@ -8,4 +8,19 @@ public class Instrumento {
 
     public Instrumento() {
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public Instrumento(InstrumentoBuilder builder) {
+        this.id = builder.getId();
+        this.nombre = builder.getNombre();
+        this.material = builder.getMaterial();
+        this.familia = builder.getFamilia();
+    }
 }
