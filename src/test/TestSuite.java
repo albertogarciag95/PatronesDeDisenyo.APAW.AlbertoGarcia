@@ -1,6 +1,7 @@
 package test;
 
 import main.*;
+import main.estrategia.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,11 +20,10 @@ public class TestSuite {
 
     @Test
     public void testBandaFactory() {
-        factory.addBanda("1", new Banda("1", "Union Musical Ciudad de Asis"));
-        factory.addBanda("2", new Banda("2", "Union Musical Villafranqueza"));
+        factory.addBanda(new Banda("1", "Union Musical Ciudad de Asis"));
+        factory.addBanda(new Banda("2", "Union Musical Villafranqueza"));
 
-        assertEquals("Union Musical Ciudad de Asis",
-                BandaFactory.getBandafactory().getBanda("1").getBandaName());
+        assertEquals("Union Musical Ciudad de Asis",factory.getBanda("1").getBandaName());
     }
 
     @Test
@@ -40,9 +40,11 @@ public class TestSuite {
         Partitura partitura = new Partitura("1", "9º Sinfonia Beethoven");
         Partitura partitura2 = new Partitura("2", "8º Sinfonia Beethoven");
 
+        // Dos objetos hoja
         PartituraLeaf partituraLeaf = new PartituraLeaf(partitura);
         PartituraLeaf partituraLeaf2 = new PartituraLeaf(partitura2);
 
+        //Un objeto composite que anyade los dos objetos hoja
         PartituraComposite partituraComposite = new PartituraComposite("Beethoven sinfonies");
         partituraComposite.add(partituraLeaf);
         partituraComposite.add(partituraLeaf2);
@@ -53,5 +55,16 @@ public class TestSuite {
         //Devuelve id de partitura si es hoja; nombre si es composite
         assertEquals("Beethoven sinfonies", partituraComposite.view());
         assertEquals("1", partituraLeaf.view());
+    }
+
+    @Test
+    public void testObserver() {
+        new Musico(factory); //Musico implementa Observer
+        new Musico(factory);
+
+        factory.addBanda(new Banda("3", "Banda de Villena"));
+        //se notifica a los dos musicos, el id del objeto anyadido
+
+        assertEquals("Banda de Villena",factory.getBanda("3").getBandaName());
     }
 }

@@ -3,7 +3,7 @@ package main;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BandaFactory {
+public class BandaFactory extends Observable{
 
     public Map<String, Banda> bandas;
     private static BandaFactory bandafactory;
@@ -19,13 +19,14 @@ public class BandaFactory {
         return bandafactory;
     }
 
-    public void addBanda(String id, Banda banda) {
+    public void addBanda(Banda banda) {
         if(bandas == null) {
             bandas = new HashMap<>();
         }
-        if(!bandas.containsKey(id)) {
-            bandas.put(id, banda);
+        if(!bandas.containsKey(banda.getId())) {
+            bandas.put(banda.getId(), banda);
         }
+        notifyObservers(banda.getId());
     }
 
     public Banda getBanda(String id) {

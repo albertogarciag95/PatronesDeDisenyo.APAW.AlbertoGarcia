@@ -10,7 +10,7 @@ public class Banda {
     private LocalDateTime fechaFundacion;
     private Musico[] musicos;
 
-    public Banda() {
+    public Banda(String id) {
         this.id = id;
     }
 
@@ -21,6 +21,10 @@ public class Banda {
 
     public String getBandaName() {
         return nombre;
+    }
+
+    public String getId() {
+        return id;
     }
 
 }
